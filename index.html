@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA BEAUTY | Luxury Cosmetics</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff8f6;color:#211817}
+header{background:#111;color:white;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.logo{font-family:Georgia,serif;color:#e9c58c;font-size:29px;letter-spacing:3px}
+nav a{color:white;text-decoration:none;margin:0 10px;font-size:13px}
+.hero{min-height:440px;padding:80px 7%;color:white;background:linear-gradient(90deg,#160e0ddd,#160e0d22),url('https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=1600&q=80') center/cover}
+.hero h1{font:clamp(42px,7vw,72px) Georgia,serif;max-width:550px}
+.hero h1 span{color:#f2b5bc;font-style:italic}
+.hero p{line-height:1.8;max-width:430px}
+button,.shop{background:#f2b5bc;color:#251718;border:0;padding:13px 20px;border-radius:25px;cursor:pointer;font-weight:bold}
+section{padding:55px 6%}
+.heading{text-align:center;font:36px Georgia,serif;margin-bottom:30px}
+.categories,.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.category,.product{background:white;border:1px solid #f0dfda;border-radius:10px;overflow:hidden;text-align:center}
+.category img{width:100%;height:150px;object-fit:cover}
+.category h3{font:20px Georgia,serif}
+#shop{background:#151312;color:white}
+.products{grid-template-columns:repeat(4,minmax(0,1fr))}
+.product{color:#211817;text-align:left;position:relative}
+.product img{width:100%;height:190px;object-fit:cover}
+.product h3,.product p,.product button{margin-left:12px;margin-right:12px}
+.product h3{font:18px Georgia,serif}
+.product button{margin-bottom:14px;width:calc(100% - 24px)}
+.price{font-weight:bold}
+#cart{position:fixed;bottom:20px;right:20px;z-index:5;box-shadow:0 4px 20px #0003}
+footer{background:#111;color:white;text-align:center;padding:35px}
+@media(max-width:700px){.categories,.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:55px 6%}nav{width:100%}.product img{height:145px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">VELORA BEAUTY</div>
+<nav><a href="#home">Home</a><a href="#categories">Categories</a><a href="#shop">Shop</a></nav>
+</header>
+
+<section class="hero" id="home">
+<p>YOUR DAILY BEAUTY RITUAL</p>
+<h1>Glow Naturally,<br>Feel <span>Beautiful.</span></h1>
+<p>Discover beautiful skincare, makeup, fragrances and self-care essentials for your everyday luxury.</p>
+<a class="shop" href="#shop" style="display:inline-block;text-decoration:none">SHOP COLLECTION →</a>
+</section>
+
+<section id="categories">
+<h2 class="heading">Discover Your Beauty</h2>
+<div class="categories" id="categoryList"></div>
+</section>
+
+<section id="shop">
+<h2 class="heading">The Beauty Collection</h2>
+<div class="products" id="productList"></div>
+</section>
+
+<button id="cart">🛍 Bag: <span id="count">0</span> | ₹<span id="total">0</span></button>
+
+<div style="text-align:center;padding:25px;background:#211817;color:white">
+  <h3>Contact Us on WhatsApp</h3>
+  <p>For orders and enquiries</p>
+  <a href="https://wa.me/919749467859"
+     style="display:inline-block;background:#25D366;color:white;padding:12px 22px;border-radius:25px;text-decoration:none;font-weight:bold">
+    WhatsApp Us
+  </a>
+  <p>WhatsApp:<strong><u>+91 9749467859</u></strong></p>
+</div>
+<footer>
+<div class="logo">VELORA BEAUTY</div>
+<p>BEAUTY · CARE · CONFIDENCE</p>
+<p>© 2026 VELORA BEAUTY</p>
+</footer>
+
+<script>
+const cats=[
+["Skincare","photo-1608248543803-ba4f8c70ae0b"],
+["Makeup","photo-1512496015851-a90fb38ba796"],
+["Haircare","photo-1527799820374-dcf8d9d4a388"],
+["Fragrance","photo-1594035910387-fea47794261f"],
+["Body Care","photo-1601049541289-9b1b7bbbfe19"],
+["Beauty Tools","photo-1522335789203-aabd1fc54bc9"]
+];
+const names=[
+["Rose Glow Serum","Skincare",699],
+["Hydrating Face Cream","Skincare",549],
+["Vitamin C Serum","Skincare",799],
+["Daily Face Cleanser","Skincare",399],
+["Skin Moisturizer","Skincare",599],
+["Overnight Face Mask","Skincare",649],
+["Nude Lipstick","Makeup",349],
+["Matte Lipstick","Makeup",399],
+["Rose Blush Palette","Makeup",599],
+["Volume Mascara","Makeup",299],
+["Liquid Foundation","Makeup",699],
+["Glow Highlighter","Makeup",449],
+["Nourishing Hair Oil","Haircare",449],
+["Shine Shampoo","Haircare",399],
+["Repair Conditioner","Haircare",429],
+["Deep Care Hair Mask","Haircare",599],
+["Floral Perfume","Fragrance",1299],
+["Rose Eau de Parfum","Fragrance",1499],
+["Midnight Bloom Perfume","Fragrance",1699],
+["Fresh Body Mist","Fragrance",599],
+["Silky Body Lotion","Body Care",449],
+["Vanilla Body Butter","Body Care",549],
+["Rose Body Wash","Body Care",349],
+["Body Scrub","Body Care",499],
+["Makeup Brush Set","Beauty Tools",699],
+["Beauty Blender","Beauty Tools",199],
+["Travel Makeup Mirror","Beauty Tools",349],
+["Hair Brush","Beauty Tools",399],
+["Facial Roller","Beauty Tools",499],
+["Daily Face Lotion","Skincare",649]
+];
+const photo=[
+"photo-1601049541289-9b1b7bbbfe19",
+"photo-1608248543803-ba4f8c70ae0b",
+"photo-1556229010-6c3f2c9ca5f8",
+"photo-1512496015851-a90fb38ba796",
+"photo-1594035910387-fea47794261f",
+"photo-1522335789203-aabd1fc54bc9"
+];
+const image=id=>"https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=600&q=80";
+document.getElementById("categoryList").innerHTML=cats.map(c=>
+`<div class="category"><img src="${image(c[1])}" alt="${c[0]}"><h3>${c[0]}</h3></div>`
+).join("");
+let count=0,total=0;
+document.getElementById("productList").innerHTML=names.map((p,i)=>
+`<div class="product"><img src="${image(photo[i%photo.length])}" alt="${p[0]}"><h3>${p[0]}</h3><p>${p[1]}</p><p class="price">₹${p[2]}</p><button onclick="add(${p[2]})">ADD TO BAG +</button></div>`
+).join("");
+
+const WHATSAPP_NUMBER = "919749467859";
+
+function add(price){
+  count++;
+  total += price;
+
+  document.getElementById("count").textContent = count;
+  document.getElementById("total").textContent = total;
+
+  const message = "Hello VELORA BEAUTY! I want to place an order. My cart total is ₹" + total;
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  document.getElementById("cart").onclick = function(){
+    window.open(url, "_blank");
+  };
+
+count++;
+total+=price;
+document.getElementById("count").textContent=count;
+document.getElementById("total").textContent=total;
+}
+document.getElementById("cart").onclick=()=>alert("Your bag has "+count+" item(s). Total: ₹"+total);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://kdvamcaecahocfhbjbyv.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_IVaPMc_xmq5WVgFyrUx7_g_MqUih8X8";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  console.log("Supabase connected");
+</script>
+<script type="module">
+  const supabase = window.supabaseClient;
+
+  async function testProducts() {
+  const { data, error } = await window.supabaseClient
+    .from('products')
+    .select('*');
+
+  if (error) {
+    console.error('Product loading error:', error.message);
+    return;
+  }
+
+  const container = document.querySelector('.products');
+
+  if (!container) {
+    console.error('Products container not found');
+    return;
+  }
+
+  data.forEach((product) => {
+    const card = document.createElement('div');
+    card.className = 'product';
+
+    const title = document.createElement('h3');
+    title.textContent = product.name;
+
+    const price = document.createElement('p');
+    price.textContent = '₹' + product.price;
+
+    card.appendChild(title);
+    card.appendChild(price);
+
+    if (product.image_url) {
+      const img = document.createElement('img');
+      img.src = product.image_url;
+      img.alt = product.name;
+      img.style.width = '100%';
+      card.prepend(img);
+    }
+
+    container.appendChild(card);
+  });
+
+  console.log('Products displayed:', data.length);
+}
+
+testProducts();
+</script>
+</body>
+</html>
+
