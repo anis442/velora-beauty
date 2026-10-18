@@ -45,6 +45,27 @@ footer{background:#111;color:white;text-align:center;padding:35px}
   <a href="#auth">Login / Register</a>
 </nav>
 </header>
+  
+<section id="auth" style="padding:30px;text-align:center;background:#fff8f0;color:#222;">
+  <h2>VELORA BEAUTY</h2>
+  <h3>Login / Register</h3>
+
+  <input id="authEmail" type="email" placeholder="Enter your email"
+    style="padding:12px;width:80%;max-width:300px;margin:8px;">
+
+  <br>
+
+  <input id="authPassword" type="password" placeholder="Enter password (minimum 6 characters)"
+    style="padding:12px;width:80%;max-width:300px;margin:8px;">
+
+  <br>
+
+  <button onclick="registerUser()" style="padding:12px 22px;margin:8px;">Register</button>
+  <button onclick="loginUser()" style="padding:12px 22px;margin:8px;">Login</button>
+  <button onclick="logoutUser()" style="padding:12px 22px;margin:8px;">Logout</button>
+
+  <p id="authMessage">Login or create your account.</p>
+</section>
 
 <section class="hero" id="home">
 <p>YOUR DAILY BEAUTY RITUAL</p>
